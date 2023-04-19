@@ -1,36 +1,19 @@
-//your code here
+// Get the ul element
+const ulElement = document.querySelector('ul#bands');
 
-let bandNames = ['The Beatles', 'Led Zeppelin', 'Pink Floyd', 'The Rolling Stones', 'U2'];
+// Define the array of band names
+let bandNames = ['The Beatles', 'Pink Floyd', 'Led Zeppelin', 'Aerosmith', 'The Rolling Stones'];
 
-// Function to sort band names without articles
-function sortBandNamesWithoutArticles(names) {
-  // Articles to be excluded from sorting
-  const articles = ['a', 'an', 'the'];
-
-  // Sort band names in lexicographic order
-  names.sort((a, b) => {
-    // Remove articles from band names for comparison
-    const bandNameA = a.replace(/^(a|an|the)\s+/i, '');
-    const bandNameB = b.replace(/^(a|an|the)\s+/i, '');
-    return bandNameA.localeCompare(bandNameB);
-  });
-
-  return names;
-}
-
-// Sort band names without articles
-const sortedBandNames = sortBandNamesWithoutArticles(bandNames);
-
-// Generate unordered list with sorted band names
-const ul = document.createElement('ul');
-ul.setAttribute('id', 'band');
-
-sortedBandNames.forEach(bandName => {
-  const li = document.createElement('li');
-  li.textContent = bandName;
-  ul.appendChild(li);
+// Sort the band names in lexicographic order excluding articles
+bandNames.sort(function(a, b) {
+  const firstWordA = a.replace(/^(a |an |the )/i, '').trim();
+  const firstWordB = b.replace(/^(a |an |the )/i, '').trim();
+  return firstWordA.localeCompare(firstWordB);
 });
 
-// Append unordered list to a container element
-const container = document.getElementById('container');
-container.appendChild(ul);
+// Append the sorted band names to the ul element as list items
+bandNames.forEach(bandName => {
+  const liElement = document.createElement('li');
+  liElement.textContent = bandName;
+  ulElement.appendChild(liElement);
+});
